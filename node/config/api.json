@@ -1,0 +1,64 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "v1",
+		"title": "Contact List",
+    	"description": "A Contact list API based on Swagger and built using Node.js"
+	},
+	"host": "localhost",
+	"schemes": ["http", "https"],
+  	"basePath": "/",
+	"paths": {
+		"/albums/{albumName}": {
+			"get": {
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "albumName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				}]
+			}
+		},
+		"/albums/{albumName}/photos": {
+			"get": {
+				"produces": ["application/json", "text/json"],
+				"parameters": [{
+					"name": "albumName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "access",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				}]
+			}
+		},
+		"/albums/{albumName}/photos/{photoName}": {
+			"get": {
+				"produces": ["image/jpg"],
+				"parameters": [{
+					"name": "albumName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "photoName",
+					"in": "path",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "access",
+					"in": "query",
+					"required": true,
+					"type": "string"
+				}]
+			}
+		}
+	}
+}
