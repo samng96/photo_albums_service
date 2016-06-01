@@ -25,7 +25,7 @@ module.exports = {
                 
                 var password = req.query.password;
             
-                if(albumInfo.password === password) {
+                if(albumInfo.password != password) {
                     res.status(401).json({
                         error: 'Invalid password'
                     });
