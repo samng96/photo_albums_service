@@ -2,11 +2,11 @@
   "name": "contactlist",
   "description": "",
   "version": "0.1.0",
-  "author": "John Doe <johndoe@outlook.com>",
+  "author": "Jake Swenson <jakes@outlook.com>",
   "contributors": [],
   "repository": {
     "type": "git",
-    "url": "git://github.com/johndoe/contactlist.git"
+    "url": "git://github.com/samng96/contactlist.git"
   },
   "bugs": "http://github.com/johndoe/contactlist/issues",
   "publishConfig": {
