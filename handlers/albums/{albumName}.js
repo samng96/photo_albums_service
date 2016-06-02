@@ -34,7 +34,9 @@ module.exports = {
                 var cookieName = 'album-' + albumName;
                 
                 function hasExpectedCookie() {
-                    return req.cookie[cookieName] == expectedHash;
+                    console.log('Cookies', req.cookies);
+                    
+                    return !!req.cookies && req.cookies[cookieName] == expectedHash;
                 }
             
                 if(!hasExpectedPassword() && !hasExpectedCookie()) {
