@@ -21,18 +21,35 @@ module.exports = {
                 return;
             }
             
-            if(albumInfo.password) {
+            if(!!albumInfo.password) {
                 
                 var password = req.query.password;
+                
+                var expectedHash = albumCrypt.hash(albumInfo.password, [albumName]);
+                
+                function hasExpectedPassword() {
+                    return albumInfo.password == password;
+                }
+                
+                var cookieName = 'album-' + albumName;
+                
+                function hasExpectedCookie() {
+                    return req.cookie[cookieName] == expectedHash;
+                }
             
-                if(albumInfo.password != password) {
+                if(!hasExpectedPassword() && !hasExpectedCookie()) {
                     res.status(401).json({
+                        albumName: albumName,
                         error: 'Invalid password'
                     });
                     return;
                 }
                 
-                var expectedHash = albumCrypt.hash(albumInfo.password, [albumName]);
+                res.cookie(cookieName, expectedHash, {
+                    expires: 0,
+                    httpOnly: true,
+                    secure: true
+                });
                 
                 res.json({
                     type: 'password',

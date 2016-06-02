@@ -22,11 +22,12 @@ module.exports = {
                 return;
             }
             
-            if(albumInfo.password) {
+            if(!!albumInfo.password) {
                 var expectedHash = albumCrypt.hash(albumInfo.password, [albumName]);
             
                 if(expectedHash != req.query.access) {
                     res.status(401).json({
+                        albumName: albumName,
                         error: 'Invalid access hash'
                     });
                     return;
@@ -37,6 +38,7 @@ module.exports = {
                
                if(albumInfo.password) {
                    console.log(photos);
+                   
                    photos.forEach(function(photo) {
                        console.log(photo);
                       photo.hash = albumCrypt.hash(albumInfo.password, [albumName, blobManager.photoKey(photo.url)]); 
