@@ -3,8 +3,6 @@
 var albumCache = require('../../lib/albumCache.js');
 var albumCrypt = require('../../lib/albumCrypt.js');
 
-
-
 module.exports = {
     get: function album_get(req, res) {
         
@@ -27,19 +25,12 @@ module.exports = {
                 
                 var expectedHash = albumCrypt.hash(albumInfo.password, [albumName]);
                 
-                function hasExpectedPassword() {
-                    return albumInfo.password == password;
-                }
-                
                 var cookieName = 'album-' + albumName;
                 
-                function hasExpectedCookie() {
-                    console.log('Cookies', req.cookies);
-                    
-                    return !!req.cookies && req.cookies[cookieName] == expectedHash;
-                }
+                console.log('Cookies', req.cookies);
             
-                if(!hasExpectedPassword() && !hasExpectedCookie()) {
+                if((albumInfo.password != password) && 
+                    (!req.cookies || req.cookies[cookieName] != expectedHash)) {
                     res.status(401).json({
                         albumName: albumName,
                         error: 'Invalid password'
